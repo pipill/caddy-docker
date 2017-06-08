@@ -5,6 +5,8 @@ LABEL caddy_version="0.10.3" architecture="arm7"
 
 ARG plugins=http.git
 
+RUN [ "cross-build-start" ]
+
 RUN apk add --no-cache openssh-client git tar php7-fpm curl
 
 # essential php libs
@@ -41,3 +43,5 @@ COPY index.php /srv/index.php
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
+
+RUN [ "cross-build-end" ] 

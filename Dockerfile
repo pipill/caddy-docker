@@ -5,6 +5,8 @@ LABEL caddy_version="0.10.3" architecture="arm7"
 
 ARG plugins=http.git
 
+RUN [ "cross-build-start" ]
+
 RUN apk add --no-cache openssh-client git tar curl
 
 RUN curl --silent --show-error --fail --location \
@@ -23,3 +25,5 @@ COPY index.html /srv/index.html
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]
+
+RUN [ "cross-build-end" ] 
