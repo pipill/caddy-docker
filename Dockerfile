@@ -1,7 +1,7 @@
-FROM alpine:3.5
+FROM pipill/armhf-alpine:3.5
 LABEL maintainer "Abiola Ibrahim <abiola89@gmail.com>"
 
-LABEL caddy_version="0.10.3" architecture="amd64"
+LABEL caddy_version="0.10.3" architecture="arm7"
 
 ARG plugins=http.git
 
@@ -9,7 +9,7 @@ RUN apk add --no-cache openssh-client git tar curl
 
 RUN curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/linux/amd64?plugins=${plugins}" \
+      "https://caddyserver.com/download/linux/arm7?plugins=${plugins}" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
  && chmod 0755 /usr/bin/caddy \
  && /usr/bin/caddy -version
